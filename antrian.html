@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            background: tomato;
+        }
+        h3{
+            margin-top: 0;
+            font-size: 90px;
+            margin-bottom: 0;
+            color: black;
+            text-align: center;
+        }
+        span#antrian{
+            background-color: white;
+            font-size: 490px;
+            padding-top: 0;
+            display: block;
+            text-align: center;
+            border-radius: 20px;
+        }
+        p{
+            width: 800px;
+            margin: 0;
+            margin-bottom: 40px;
+            border: none;
+            background-color: white;
+            border-radius: 20px;
+            margin: auto;
+        }
+
+       
+        button#tombol_p{
+             border: none;
+             border-radius: 5px;
+             background-color: white;
+
+             font-size: 90px;
+             font-family:Georgia, 'Times New Roman', Times, serif;
+             cursor: pointer;
+             font-weight: bold;
+             padding: 5px 30px;
+             letter-spacing: -0.003em;
+             margin-top:20px;
+             text-align: center;
+        }
+
+        button#tombol_p:hover{
+            color: white;
+            background-color: black;
+        }
+
+        button:active{
+            opacity: 0.5;
+        }
+
+        button#prev{
+            display:inline-block;
+            border: none;
+            float: left;
+            cursor: pointer;
+        }
+
+        button#prev:hover{
+            color: white;
+            background-color: tomato;
+        }
+
+        button#next{
+            display: inline-block;
+            border: none;
+            float: right;
+            cursor: pointer;
+        }
+
+        button#next:hover{
+            color: white;
+            background-color: tomato;
+        }
+
+        .time{
+            visibility: hidden;
+        }
+
+        @media only print {
+            body.struk                 { width: 58mm; text-align: left; border:1px solid black}
+            body.struk .sheet          { padding: 2mm; }
+
+            span#antrian{
+
+                background-color: white;
+                font-size: 150px;
+                border-radius: 20px;
+                text-align: center;
+            }
+            p{
+                width: 58mm;
+                text-align: center;
+                margin-bottom: 0;
+            }
+            h3{
+                padding-top: 10px;
+                margin-top: 0;
+                font-size: 30px;
+                margin-bottom: 0;
+                color: black;
+            }
+            #tombol{
+                visibility: hidden;
+            }
+
+
+            .time{
+                visibility: visible;
+                margin-top: 0;
+            }
+
+            span#tanggalwaktu{
+                font-size: 20px;
+            }
+
+        }
+    </style>
+    <title>Nomor Antrian</title>
+</head>
+<body class="struk">
+    
+        <h3>RSUD TANDUALE</h3>
+    
+        <!-- Yang Diganti untuk Menentukan Nilai Awal-->
+        <!--              yang ini                   -->
+        <p><span id="antrian">1</span></p>
+
+    
+    <div class="time">
+        <p><span id="tanggalwaktu"></span></p>
+    </div>
+
+    <div id="tombol">
+        <center><button id="tombol_p">AMBIL ANTRIAN </button></center>
+        <button id="prev"> << </button>
+        <button id="next"> >> </button>
+
+    </div>
+    
+   
+    
+    <script>
+        document.getElementById("tombol_p").addEventListener("click", tampilkan_nilai_p);
+        document.getElementById("prev").addEventListener("click", kembali);
+        document.getElementById("next").addEventListener("click", noNext);
+
+        
+        
+        
+        function tampilkan_nilai_p() {
+            
+            var noAntrian = document.getElementById("antrian").innerHTML;
+            var hideTombol = document.getElementById("tombol");
+        
+            window.print();
+    
+        
+            var nilai = parseInt(noAntrian) + 1;
+        
+            document.getElementById("antrian").innerHTML=nilai;
+
+            hideTombol.style.display= 'shown';
+        }
+
+        function kembali() {
+            var noKembali = document.getElementById("antrian").innerHTML;
+
+            var nilaiKembali;
+
+            if(noKembali == 1){
+                nilaiKembali = 1;
+                document.getElementById("antrian").innerHTML=nilaiKembali;
+            }else{
+                nilaiKembali = parseInt(noKembali) - 1;
+                document.getElementById("antrian").innerHTML=nilaiKembali;
+            }
+
+        }
+
+        function noNext() {
+            var noKembali = document.getElementById("antrian").innerHTML;
+
+            var nilaiKembali = parseInt(noKembali) + 1;
+
+            document.getElementById("antrian").innerHTML=nilaiKembali
+
+
+        }
+
+        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]; 
+        const time = new Date();
+        let month = months[time.getMonth()]; 
+        let day = time.getDate();
+        let year = time.getFullYear();
+        document.getElementById("tanggalwaktu").innerHTML = day +' '+ month + ' ' + year;
+    </script>
+    
+</body>
+</html>
